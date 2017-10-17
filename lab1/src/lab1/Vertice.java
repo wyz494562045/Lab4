@@ -9,7 +9,7 @@ public class Vertice {
 	private Vertice pi;
 	public Vertice() {
 		word = "";
-		next = 0;
+		next = null;
 		ajen = null;
 		weight = 0;
 		d = 10000000;
