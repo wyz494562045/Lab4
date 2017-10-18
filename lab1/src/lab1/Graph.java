@@ -82,6 +82,7 @@ public class Graph {
 				int midX = (x+x2)/2;
 				int midY = (y+y2)/2;
 				int rad = 10;
+				String str="";
 				g.setColor(Color.orange);
 				g.fillOval(midX, midY, rad, rad);
 				g.drawOval(midX, midY, rad, rad);
@@ -90,14 +91,15 @@ public class Graph {
 				g.drawLine(x,y,x2, y2);
 				printArow(g,x,y,x2,y2,R);
 				g.setFont(new Font("Monosapced",Font.BOLD,TextHeight));
-				g.drawString(""+ajenVer.getWeight(), (x2-x)/3+x, (y2-y)/3+y);
+				str+=ajenVer.getWeight();
+				g.drawString(str, (x2-x)/3+x, (y2-y)/3+y);
 				ajenVer = ajenVer.getAjen();
 			}
 		}
 		Font fond=new Font("Monosapced",Font.BOLD,TextHeight);
 		for (int i = 0;i < num;i++) {
 			x = (int)((orignalX-R)*Math.cos(Math.toRadians(dDeg*i)))+orignalX;
-			y = (int)((orignalX-R)*Math.sin((Math.toRadians(dDeg*i))))+orignalY;
+			y = (int)((orignalX-R)*Math.sin(Math.toRadians(dDeg*i)))+orignalY;
 			g.setColor(Color.CYAN);
 			g.fillOval(x-R,y-R, 2*R, 2*R);
 			g.setColor(Color.YELLOW);
@@ -390,7 +392,9 @@ public String generateNewText(String inputText) {
 			};
 			Queue<Vertice> pq = new PriorityQueue<Vertice>(numOfNodes,t);
 			s.setD(0);
-			Vertice u,v,edgeV = null;
+			Vertice u = null;
+			Vertice v = null;
+			Vertice edgeV = null;
 			u = null;
 			int num = 0;
 			while (num < numOfNodes) {
