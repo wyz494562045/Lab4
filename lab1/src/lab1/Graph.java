@@ -154,6 +154,18 @@ public class Graph {
 	public String queryBridgeWords(String word1, String word2) {
 		Vertice word1Node =  search(word1);
 		Vertice word2Node =  search(word2);
+		if(word1Node==null && word2Node==null){
+			System.out.print(word1+" and "+word2+" is not in the graph \n");
+			return word2;
+		}
+		else if(word1Node==null){
+			System.out.print(word1+" is not in the graph \n");
+			return word2;
+		}
+		else if(word2Node==null){
+			System.out.print(word2+" is not in the graph \n");
+			return word2;
+		}
 		//Vertice word1Node = matrix[Math.abs(word1.hashCode())%100];first change
 
 		Vertice AjenOfWord1 = word1Node,temp,midNode;
@@ -226,6 +238,7 @@ public String generateNewText(String inputText) {
 			}
 		}
 		int bridgeNodeNum;
+		
 		String[] words = new String [100];
 		words = inputText.split(" ");
 
