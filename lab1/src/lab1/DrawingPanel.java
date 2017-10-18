@@ -23,6 +23,7 @@ package lab1;
  * See JavaDoc comments below for more information.
  */
 
+
 import java.awt.FontMetrics;
 import java.awt.Rectangle;
 import java.awt.Shape;
@@ -198,7 +199,8 @@ public final class DrawingPanel implements ImageObserver {
     private static final Color GRID_LINE_COLOR      = new Color(64, 64, 64, 128);
     private static final Object LOCK                = new Object();
 
-    private static final boolean SAVE_SCALED_IMAGES = true;    // if true, when panel is zoomed, saves images at that zoom factor
+    // if true, when panel is zoomed, saves images at that zoom factor
+    private static final boolean SAVE_SCALED_IMAGES = true;    
     private static final int DELAY                  = 100;     // delay between repaints in millis
     private static final int GRID_SIZE              = 10;      // 10px between grid lines
     private static final int MAX_FRAMES             = 100;     // max animation frames

@@ -6,8 +6,8 @@ import java.awt.Graphics;
 import java.util.*;
 
 public class Graph {
-	private int numOfNodes;
-	private Vertice[] matrix = new Vertice[100];
+    private int numOfNodes;
+    private Vertice[] matrix = new Vertice[100];
 	public Graph(String text) {
 		for (int i = 0;i < 100;i++)
 			matrix[i] = new Vertice();
@@ -107,9 +107,9 @@ public class Graph {
 		}
 
 	}
-	private void printArow(Graphics gr,int x1,int y1,int x2,int y2,int R) {
+	private void printArow(Graphics gr,int x1,int y1,int x2,int y2,int Rtemp) {
 		int dx = x1-x2,dy = y1-y2;
-		double lamd = Math.sqrt((double)(dx*dx)+(double)(dy*dy))/R,cons,a,b,c;
+		double lamd = Math.sqrt((double)(dx*dx)+(double)(dy*dy))/Rtemp,cons,a,b,c;
 		int arowX,arowY,endX1,endY1,endX2,endY2;
 		arowX = (int)(dx/lamd+x2);
 		arowY = (int)(dy/lamd+y2);
@@ -139,9 +139,9 @@ public class Graph {
 
 	}
 	private Vertice find(int i) {
-		for (int ii = 0;ii < 100;ii++) {
-			if (matrix[ii].getWord() != "") {
-				Vertice temp = matrix[ii];
+		for (int j = 0;j < 100;j++) {
+			if (matrix[j].getWord() != "") {
+				Vertice temp = matrix[j];
 				while (temp != null && temp.getRank() != i) {
 					temp = temp.getNext();
 				}
@@ -248,7 +248,7 @@ public String generateNewText(String inputText) {
 			if(bridgeNodeNum>0) {
 				System.out.print(matrix[bridgeNodeNum].getWord()+" ");
 			}
-			System.out.print(words[i+1]+" ");
+			System.out.println(words[i+1]+" ");
 		}
 
 		System.out.print("\n");
@@ -283,8 +283,9 @@ public String generateNewText(String inputText) {
 		String path = shortestPath(v1,v2.getPi()) + "---->" + v2.getWord();
 		return path;
 	}
+	//calculate shortest path
 	public String calcShortestPath1(String word1, String word2) {
-		if(word1.equals("time") && word2.equals("word"))
+		if (word1.equals("time") && word2.equals("word"))
 			return "time->servitization->becomes->one->of->this->word";
 		Vertice word1Node = search(word1);
 		Vertice word2Node = search(word2);
@@ -293,15 +294,15 @@ public String generateNewText(String inputText) {
 
 		int i,j,v,sum;
 		int [][]minLength = new int [100][100];
-		int [] father  = new int[100];
+		int [] father = new int[100];
 		int min,nextRank;
 		int [] visited = new int[100];
 		int word1Rank = word1Node.getRank();
 		int word2Rank = word2Node.getRank();
 
-		for(i=0;i<100;i++) {
-			for(j=0;j<100;j++) {
-				if(i!=j) {
+		for (i=0;i<100;i++) {
+			for (j=0;j<100;j++) {
+				if (i != j) {
 					minLength[i][j] = 999;
 				}
 			}
@@ -407,8 +408,7 @@ public String generateNewText(String inputText) {
 				return "NO SHORTEST PATH!!!";
 			else
 				return shortestPath(s,e);
-		}
-		else {
+		}else {
 			return "path don't exist";
 		}
 	}
@@ -452,7 +452,7 @@ public String generateNewText(String inputText) {
         	}
 
 ////////////////加用户询问
-        	/*Scanner sc = new Scanner(System.in
+        	/*Scanner Sr = new Scanner(System.in
 
 );
             System.out.println("\n输入1停止，其他继续输出:");
