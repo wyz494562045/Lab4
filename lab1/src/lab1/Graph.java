@@ -15,8 +15,9 @@ public class Graph {
 		int i = 0,j;
 		while (i < text.length()){
 			word1 = word2.substring(0,word2.length());
-			while (i < text.length() && text.charAt(i) == ' ')
+			while (i < text.length() && text.charAt(i) == ' ') {
 				i++;
+			}
 			j = i;
 			while (i < text.length() && text.charAt(i) != ' ')
 				i++;
@@ -80,7 +81,7 @@ public class Graph {
 				int y2 = (int)((orignalX-R)*Math.sin(Math.toRadians(dDeg*ajenVer.getRank())))+orignalY;
 				int midX = (x+x2)/2;
 				int midY = (y+y2)/2;
-				final int rad = 10;
+				int rad = 10;
 				g.setColor(Color.orange);
 				g.fillOval(midX, midY, rad, rad);
 				g.drawOval(midX, midY, rad, rad);
@@ -93,15 +94,16 @@ public class Graph {
 				ajenVer = ajenVer.getAjen();
 			}
 		}
+		Font fond=new Font("Monosapced",Font.BOLD,TextHeight);
 		for (int i = 0;i < num;i++) {
-			x = (int)((orignalX-R)*Math.cos((Math.toRadians(dDeg*i))))+orignalX;
+			x = (int)((orignalX-R)*Math.cos(Math.toRadians(dDeg*i)))+orignalX;
 			y = (int)((orignalX-R)*Math.sin((Math.toRadians(dDeg*i))))+orignalY;
 			g.setColor(Color.CYAN);
 			g.fillOval(x-R,y-R, 2*R, 2*R);
 			g.setColor(Color.YELLOW);
 			g.drawOval(x-R, y-R, 2*R, 2*R);
 			g.setColor(Color.BLACK);
-			g.setFont(new Font("Monosapced",Font.BOLD,TextHeight));
+			g.setFont(fond);
 			g.drawString(find(i).getWord(), x-TextHeight-10, y+TextHeight/2);
 
 		}
@@ -140,7 +142,8 @@ public class Graph {
 	}
 	private Vertice find(int i) {
 		for (int j = 0;j < 100;j++) {
-			if (matrix[j].getWord() != "") {
+			String str=matrix[j].getWord();
+			if (!str.equals("")) {
 				Vertice temp = matrix[j];
 				while (temp != null && temp.getRank() != i) {
 					temp = temp.getNext();
@@ -154,17 +157,18 @@ public class Graph {
 	public String queryBridgeWords(String word1, String word2) {
 		Vertice word1Node =  search(word1);
 		Vertice word2Node =  search(word2);
+		int flag=0;
 		if(word1Node==null && word2Node==null){
 			System.out.print(word1+" and "+word2+" is not in the graph \n");
-			return word2;
+			flag=1;
 		}
 		else if(word1Node==null){
 			System.out.print(word1+" is not in the graph \n");
-			return word2;
+			flag=1;
 		}
 		else if(word2Node==null){
 			System.out.print(word2+" is not in the graph \n");
-			return word2;
+			flag=1;
 		}
 		//Vertice word1Node = matrix[Math.abs(word1.hashCode())%100];first change
 
@@ -188,10 +192,10 @@ public class Graph {
 		}
 
 
-		if(Wordscot==0) {
+		if(Wordscot==0 && flag==0) {
 			System.out.print("no bridge words from "+word1+" to "+word2+"\n");
 		}
-		else if(Wordscot==1) {
+		else if(Wordscot==1 && flag==0) {
 			System.out.print("the bridge words from "+word1+" to "+ word2 +" is "+Words[0].getWord()+"\n" );
 		}
 		else {
@@ -369,14 +373,19 @@ public String generateNewText(String inputText) {
 			initialV = nextRank(initialV);
 		}
 		if (s != null && e != null) {
-			Comparator<Vertice> t = new Comparator<Vertice>() {
+			final Comparator<Vertice> t = new Comparator<Vertice>() {
 				public int compare(Vertice v1,Vertice v2) {
 					if (v1.getD() > v2.getD())
+					{
 						return 1;
+					}
 					else if (v1.getD() == v2.getD())
+					{
 						return 0;
-					else
+					}
+					else {
 						return -1;
+					}
 				}
 			};
 			Queue<Vertice> pq = new PriorityQueue<Vertice>(numOfNodes,t);
